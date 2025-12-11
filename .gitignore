@@ -3,4 +3,5 @@ __pycache__/
 *.pyc
 .env
 serviceAccountKey.json
+gcp_key.json
 .streamlit/secrets.toml

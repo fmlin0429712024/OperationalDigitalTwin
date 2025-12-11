@@ -12,12 +12,13 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the content of the local src directory to the working directory
-COPY . .
+# Copy startup script
+COPY start.sh .
+RUN chmod +x start.sh
 
 # Service must listen to $PORT environment variable.
 # Streamlit uses 8501 by default, but Cloud Run expects 8080 usually.
 # We will launch streamlit on 8080.
 EXPOSE 8080
 
-CMD streamlit run main.py --server.port 8080 --server.address 0.0.0.0
+CMD ["./start.sh"]

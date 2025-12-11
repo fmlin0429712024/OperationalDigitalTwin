@@ -13,11 +13,9 @@ def init_firebase():
                 cred = credentials.Certificate("serviceAccountKey.json")
                 firebase_admin.initialize_app(cred)
             else:
-                # Fallback or Streamlit Secrets (Production)
-                # If you use Streamlit Cloud, you would store this in st.secrets
-                # For now, we will print a warning if missing
-                print("Warning: serviceAccountKey.json not found. Database calls will fail.")
-                return None
+                # Production / Cloud Run (Uses Application Default Credentials)
+                print("ℹ️ Using Application Default Credentials (ADC)")
+                firebase_admin.initialize_app()
         except Exception as e:
             print(f"Failed to initialize Firebase: {e}")
             return None

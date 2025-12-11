@@ -66,8 +66,9 @@ def fetch_data():
         return get_mock_data()
     
     # Fetch last 100 records
+    from google.cloud.firestore import Query
     docs = db.collection("telemetry_stream")\
-             .order_by("timestamp", direction=db.Client.DESCENDING)\
+             .order_by("timestamp", direction=Query.DESCENDING)\
              .limit(200)\
              .stream()
     

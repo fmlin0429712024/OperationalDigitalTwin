@@ -1,6 +1,16 @@
-# Operational Digital Twin PoC Specification
+# Operational Digital Twin PoC
 
-## 1. Executive Summary
+![Build Status](https://github.com/fmlin0429712024/OperationalDigitalTwin/actions/workflows/firebase-deploy.yml/badge.svg)
+
+A Proof of Concept for an Industrial Digital Twin, demonstrating Operational Intelligence (OI) and Business Intelligence (BI) using Simulated Edge Data.
+
+## 🚀 Live Demo
+**[Launch Dashboard](https://prescientdemos.web.app)** (After CI/CD deployment completes)
+
+## 🏗️ Architecture
+*   **Edge**: Python Simulator (`simulator.py`) genrating telemetry.
+*   **Cloud**: Firebase Firestore (NoSQL Database).
+*   **App**: Streamlit Dashboard hosted on Google Cloud Run.
 This project aims to build a Minimum Viable Product (PoC) of an **Operational Digital Twin** for Analytical Instrumentation, inspired by the Prescient Devices customer story. The goal is to demonstrate how "Edge" data (simulated) can be transformed into actionable Operational Intelligence (OI) and Business Intelligence (BI) for stakeholders.
 
 ## 2. Feasibility Analysis

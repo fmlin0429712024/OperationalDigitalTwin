@@ -12,8 +12,10 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy startup script
-COPY start.sh .
+# Copy the content of the local src directory to the working directory
+COPY . .
+
+# Copy startup script and make it executable
 RUN chmod +x start.sh
 
 # Service must listen to $PORT environment variable.

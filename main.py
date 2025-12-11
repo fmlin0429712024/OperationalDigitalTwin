@@ -99,6 +99,7 @@ def fetch_data():
 c1, c2 = st.columns([3, 1])
 with c1:
     st.title("🏭 Operational Digital Twin v1.1")
+    # CI/CD Test: Cloud Build Trigger Active
     st.caption("Real-time Operational & Business Intelligence • Powered by Edge AI")
 with c2:
     if db:

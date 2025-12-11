@@ -135,17 +135,27 @@ df = fetch_data()
 st.markdown("### 📊 Enterprise View")
 kpi1, kpi2, kpi3, kpi4 = st.columns(4)
 
-active_devices = df[df['status'] == 'RUNNING']['device_id'].nunique()
-total_devices = df['device_id'].nunique()
-avg_utilization = (len(df[df['status'] == 'RUNNING']) / len(df)) * 100 if len(df) > 0 else 0
-critical_errors = len(df[df['status'] == 'ERROR'])
-
-kpi1.metric("Active Fleet", f"{active_devices}/{total_devices}", delta=f"{active_devices} Online")
-kpi2.metric("OEE (Utilization)", f"{avg_utilization:.1f}%", delta="1.2%")
-kpi3.metric("Critical Alerts (24h)", critical_errors, delta=f"-{random.randint(1,3)}", delta_color="inverse")
-# BI Calculation: Approx $100 per unit throughput
-est_revenue = df['throughput'].sum() * 10 
-kpi4.metric("Est. Throughput Revenue", f"${est_revenue:,.0f}", delta="+8%")
+if len(df) > 0 and 'device_id' in df.columns:
+    active_devices = df[df['status'] == 'RUNNING']['device_id'].nunique()
+    total_devices = df['device_id'].nunique()
+    avg_utilization = (len(df[df['status'] == 'RUNNING']) / len(df)) * 100 if len(df) > 0 else 0
+    critical_errors = len(df[df['status'] == 'ERROR'])
+    
+    kpi1.metric("Active Fleet", f"{active_devices}/{total_devices}", delta=f"{active_devices} Online")
+    kpi2.metric("OEE (Utilization)", f"{avg_utilization:.1f}%", delta="1.2%")
+    kpi3.metric("Critical Alerts (24h)", critical_errors, delta=f"-{random.randint(1,3)}", delta_color="inverse")
+    
+    # BI Calculation: Approx $100 per unit throughput
+    if 'throughput' in df.columns:
+        est_revenue = df['throughput'].sum() * 10 
+    else:
+        est_revenue = 0
+    kpi4.metric("Est. Throughput Revenue", f"${est_revenue:,.0f}", delta="+8%")
+else:
+    kpi1.metric("Active Fleet", "0/0", delta="No Data")
+    kpi2.metric("OEE (Utilization)", "0.0%", delta="0%")
+    kpi3.metric("Critical Alerts (24h)", 0, delta="0")
+    kpi4.metric("Est. Throughput Revenue", "$0", delta="0%")
 
 # 3. Fleet Monitoring (OI)
 st.markdown("---")

@@ -98,7 +98,7 @@ def fetch_data():
 # Header
 c1, c2 = st.columns([3, 1])
 with c1:
-    st.title("🏭 Operational Digital Twin")
+    st.title("🏭 Operational Digital Twin v1.1")
     st.caption("Real-time Operational & Business Intelligence • Powered by Edge AI")
 with c2:
     if db:
@@ -107,17 +107,45 @@ with c2:
         st.warning("⚠️ Demo Mode (Local Mock Data)")
 
 # --- Solution Overview ---
-with st.expander("ℹ️ Solution Overview", expanded=False):
+with st.expander("ℹ️ Solution Overview - Demo Walkthrough", expanded=False):
     st.markdown("""
-    **Operational Digital Twin for Analytical Instrumentation**
+    ### 🎯 What You're Seeing
     
-    This Proof of Concept (PoC) demonstrates how Prescient Devices helps manufacturers transform raw edge data into actionable insights.
+    This is a **live demonstration** of an Industrial Digital Twin solution that transforms raw equipment data into actionable insights.
     
-    *   **Real-time Visibility**: Monitor fleet status and health instantly.
-    *   **Operational Intelligence (OI)**: Detect anomalies like high vibration before failure.
-    *   **Business Intelligence (BI)**: Track utilization and revenue impact.
+    #### 📡 Architecture Components
     
-    [Read the Full Prescient Customer Story](https://www.prescientdevices.com/customer-story/industrial-digital-twin-for-oi-and-bi)
+    1. **Edge Simulation** (Running in Cloud)
+       - 5 simulated analytical instruments (Mass Spectrometers, Chromatographs)
+       - Generating real-time telemetry every 3 seconds
+       - Realistic state transitions: IDLE → RUNNING → ERROR → MAINTENANCE
+    
+    2. **Cloud Data Platform** (Firebase Firestore)
+       - NoSQL database storing time-series telemetry
+       - Real-time synchronization across all clients
+       - Scalable to millions of data points
+    
+    3. **Analytics Dashboard** (This Page)
+       - Live visualization of fleet status
+       - Operational Intelligence (OI): Device health, alerts, performance
+       - Business Intelligence (BI): Utilization rates, revenue impact
+    
+    #### 💡 Key Insights Demonstrated
+    
+    - **Fleet Visibility**: See all devices at a glance - which are running, idle, or in error state
+    - **Predictive Maintenance**: Vibration analysis detects anomalies before failure
+    - **Utilization Optimization**: Track OEE (Overall Equipment Effectiveness) in real-time
+    - **Revenue Impact**: Calculate business value from improved uptime (39% improvement case study)
+    
+    #### 🔗 Learn More
+    
+    This PoC is inspired by the [Prescient Devices Customer Story](https://www.prescientdevices.com/customer-story/industrial-digital-twin-for-oi-and-bi) 
+    which achieved:
+    - ✅ 39% improvement in instrument utilization
+    - ✅ Real-time visibility into installed base
+    - ✅ New SaaS revenue streams from Lab Insights
+    
+    **Try It**: Click "🔄 Refresh Data" below to see live updates, or select different devices to drill into their metrics.
     """)
 
 # Auto-Refresh Loop Helper
